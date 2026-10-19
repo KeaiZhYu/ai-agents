@@ -1,13 +1,97 @@
-"""在这里与 Agent 编写自己的测试；当前没有现成测试。
+"""W4 学生测试：独立的追加方案。
 
-每个测试用 def test_某个承诺(make_variant): 接收候选函数。
-make_variant 是课程 fixture；不要直接从 variant/examples import 实现，
-否则 --impl 无法切换你的测试实际检查的对象。
+自选输入（与课堂例子不同）：
+    source = {"seed": 123, "sample_sizes": [250, 500, 1000, 2000]}
+    make_variant(source, seed=7, index=1, replacement=750)
+预期（按修改规则独立写出，不调用被测实现生成）：
+    {"seed": 7, "sample_sizes": [250, 750, 1000, 2000]}
 
-先独立写出输入与答案，再检查返回内容、旧配置、字典和列表身份。
-用同一份学生测试拒绝 direct / shallow，并接受 reference。
-必做：自己换一组合法输入，检查两次调用与后续修改是否相互影响。
-
-这里不提供跳过测试或永远为真的占位断言。
-若单独运行本文件显示 no tests ran，表示你还没有写出自己的测试。
+每个测试通过函数参数接收课程 fixture make_variant，不直接 import 实现，
+这样 --impl 才能切换被检查的候选。
 """
+
+
+def _source():
+    return {"seed": 123, "sample_sizes": [250, 500, 1000, 2000]}
+
+
+def _expected():
+    return {"seed": 7, "sample_sizes": [250, 750, 1000, 2000]}
+
+
+def test_updates_only_requested_values(make_variant):
+    source = _source()
+
+    result = make_variant(source, seed=7, index=1, replacement=750)
+
+    assert result == _expected()
+
+
+def test_source_content_stays_as_before(make_variant):
+    source = _source()
+
+    make_variant(source, seed=7, index=1, replacement=750)
+
+    assert source == {"seed": 123, "sample_sizes": [250, 500, 1000, 2000]}
+
+
+def test_result_owns_new_dictionary_and_list(make_variant):
+    source = _source()
+
+    result = make_variant(source, seed=7, index=1, replacement=750)
+
+    assert result is not source
+    assert result["sample_sizes"] is not source["sample_sizes"]
+
+
+def test_later_changes_to_result_do_not_reach_source(make_variant):
+    source = _source()
+    result = make_variant(source, seed=7, index=1, replacement=750)
+
+    result["seed"] = 8
+    result["sample_sizes"][1] = 775
+    result["sample_sizes"].append(4000)
+
+    assert result == {"seed": 8, "sample_sizes": [250, 775, 1000, 2000, 4000]}
+    assert source == {"seed": 123, "sample_sizes": [250, 500, 1000, 2000]}
+
+
+def test_two_identical_calls_can_be_changed_separately(make_variant):
+    source = _source()
+
+    first = make_variant(source, seed=7, index=1, replacement=750)
+    second = make_variant(source, seed=7, index=1, replacement=750)
+
+    assert first == _expected()
+    assert second == _expected()
+    assert first == second
+    assert first is not second
+    assert first["sample_sizes"] is not second["sample_sizes"]
+
+    first["seed"] = 8
+    first["sample_sizes"][1] = 775
+
+    assert second == _expected()
+    assert source == {"seed": 123, "sample_sizes": [250, 500, 1000, 2000]}
+
+
+def test_unchanged_parameters_still_return_independent_plan(make_variant):
+    source = _source()
+
+    first = make_variant(source, seed=123, index=1, replacement=500)
+    second = make_variant(source, seed=123, index=1, replacement=500)
+
+    assert first == source
+    assert second == source
+    assert first is not source
+    assert second is not source
+    assert first is not second
+    assert first["sample_sizes"] is not source["sample_sizes"]
+    assert second["sample_sizes"] is not source["sample_sizes"]
+    assert first["sample_sizes"] is not second["sample_sizes"]
+
+    first["sample_sizes"][1] = 5000
+
+    assert second == {"seed": 123, "sample_sizes": [250, 500, 1000, 2000]}
+    assert source == {"seed": 123, "sample_sizes": [250, 500, 1000, 2000]}
+
