@@ -92,7 +92,8 @@ result = {k: v ** 2 for k, v in record.items() if v >= 2}
 
 ## 综合题：选一题展开，其他留作拓展
 
-- 完整条件与结论在 [`challenges/README.md`](challenges/README.md)，参考实现在 `challenges/examples.py`。
+- 投屏打开 [`challenges/demo.ipynb`](challenges/demo.ipynb)：先展示题目与输入，停下来给学生操作，再向下展示参考代码、运行结果和边界。题目文字与完整函数分开成 cell，不需要临场从文件里找答案。
+- 完整条件与结论在 [`challenges/README.md`](challenges/README.md)，验收使用的参考实现在 `challenges/examples.py`。
 - A 顺序去重与频数统计：同一个值在 unique 只出现一次，在 counts 累计，在 repeated 中按次数判断。
 - B 应用修改：沿一个键追踪“更新 → 再更新 → 删除”，最后与原记录比较；恢复原值、新增后删除不算最终变化。
 - C 两次测量：沿一个编号核对位置、变化量、绝对值与阈值；等于阈值正常，正负向都可能异常。

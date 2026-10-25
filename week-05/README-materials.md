@@ -43,7 +43,7 @@ Python／Jupyter 扩展或 kernel 选择受阻时，把实际界面交给 Agent 
 - `tests/conftest.py`：按 `--impl` 选择验收对象的课程工具，不修改。
 - `tests/test_acceptance.py`：教师公开验收，不修改预期来获得通过。
 - `tests/test_student.py`：一条可扩充的学生测试示例；在这里增加自己的用例。
-- [`challenges/README.md`](challenges/README.md)：三道各按 20～30 分钟活动准备的独立综合题，含精确条件、示例、Agent 提示与单独验收命令。
+- [`challenges/demo.ipynb`](challenges/demo.ipynb)：三道独立综合题的课堂展示，每题按“题目 → 完整参考解答 → 运行核对”推进；条件与验收见 [`challenges/README.md`](challenges/README.md)。
 - `../.github/workflows/week-05.yml`：远端重复运行同一套本地测试，不负责部署。
 
 ## 最后的三道任务

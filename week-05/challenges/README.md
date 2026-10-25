@@ -4,6 +4,8 @@
 
 这里使用本周已经见过的 list、dict、set、数组、遍历与筛选。函数壳已经提供，可以由 Agent 编写实现；本人负责确认条件与结论。
 
+课堂展示使用 [`demo.ipynb`](demo.ipynb)：每题先用 Markdown 展示条件与预期，再给出独立的完整 Python 参考解答、运行结果和边界例子。教师可停在题目处，让大家先做，再向下展示解答。沿用 `week-05/.venv` kernel，无需建立另一个环境。
+
 ## 开始方式与共同约定
 
 - 在 `challenges/work.py` 完成选中的函数，不必实现另外两题。
@@ -176,6 +178,7 @@ uv run --locked pytest -q challenges -k compare_measurements --challenge-impl=st
 ## 参考与故障对照
 
 - `work.py`：学生实现；初始函数壳会报未实现。
+- `demo.ipynb`：可直接演示的题目、完整参考解答与核对过程；示例通过不代表 work.py 已完成。
 - `examples.py`：教师公开参考与已知故障。
 - `conftest.py`：按模式选择函数的工具；`test_tasks.py`：给定验收。
 - 每题的测试通过同名函数参数接收实现；可让 Agent 参照给定测试写自己的用例。
