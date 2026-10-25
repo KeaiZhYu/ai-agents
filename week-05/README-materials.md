@@ -43,6 +43,7 @@ Python／Jupyter 扩展或 kernel 选择受阻时，把实际界面交给 Agent 
 - `tests/conftest.py`：按 `--impl` 选择验收对象的课程工具，不修改。
 - `tests/test_acceptance.py`：教师公开验收，不修改预期来获得通过。
 - `tests/test_student.py`：一条可扩充的学生测试示例；在这里增加自己的用例。
+- [`challenges/README.md`](challenges/README.md)：三道各按 20～30 分钟活动准备的独立综合题，含精确条件、示例、Agent 提示与单独验收命令。
 - `../.github/workflows/week-05.yml`：远端重复运行同一套本地测试，不负责部署。
 
 ## 最后的三道任务
@@ -123,6 +124,8 @@ git push origin main
 工作流只申请仓库内容读取权限，不需要填写 Secret、不部署网站、不要求学生编写 YAML。账户／组织禁用 Actions、网络或依赖下载失败时，不临场修改安全策略；保留错误并先在本地运行同一条 `uv run --locked pytest -q --impl=student`。本地通过不冒充远端已经通过。
 
 ## 核对与延伸
+
+讲练或基础任务完成后，可进入 [`challenges/`](challenges/README.md)，任选“顺序去重与频数统计”“应用一批记录修改”或“比较两次测量”。三题由 Agent 协助实现，本人负责预测另一组输入、运行测试并解释边界；不要求全部完成。它们必须显式运行单独的验收命令，不影响本周默认测试与 CI。
 
 完成后保留代码、测试结果和一次失败修正。公开参考答案可以用来核对，但本人仍需说明一次操作改变了什么、返回了什么，以及一个循环每轮处理了什么。
 
