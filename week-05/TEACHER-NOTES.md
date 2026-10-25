@@ -2,6 +2,8 @@
 
 `demo.ipynb` 的示例全部预先写好。第一次从干净 kernel 顺序运行；课堂停在微练习处，让学生先预测，再修改一处。微练习的原代码是可运行起点，原版 Run All 不表示学生已经完成修改。
 
+默认路线：主 Notebook 从头到小练习 8 → `challenges/demo.ipynb` 的 A 题 → 第三课时回 `operations.py` 与 Terminal。B、C 供提前完成者继续探索。
+
 ## 恢复与观察
 
 - 每格演示或微练习都自行初始化所用数据；需要恢复时，重跑该格完整代码。
@@ -93,6 +95,7 @@ result = {k: v ** 2 for k, v in record.items() if v >= 2}
 ## 综合题：选一题展开，其他留作拓展
 
 - 投屏打开 [`challenges/demo.ipynb`](challenges/demo.ipynb)：先展示题目与输入，停下来给学生操作，再向下展示参考代码、运行结果和边界。题目文字与完整函数分开成 cell，不需要临场从文件里找答案。
+- 题内先顺序运行；已跑过函数定义后，样例核对与边界核对两类 cell 都能回头单独重跑。
 - 完整条件与结论在 [`challenges/README.md`](challenges/README.md)，验收使用的参考实现在 `challenges/examples.py`。
 - A 顺序去重与频数统计：同一个值在 unique 只出现一次，在 counts 累计，在 repeated 中按次数判断。
 - B 应用修改：沿一个键追踪“更新 → 再更新 → 删除”，最后与原记录比较；恢复原值、新增后删除不算最终变化。
