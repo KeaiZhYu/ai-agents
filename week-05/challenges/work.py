@@ -1,7 +1,5 @@
 """W5 综合选做：按合同完成函数，使用 challenges 中的公开测试验收。"""
 
-import numpy as np
-
 
 def summarize_values(values):
     """整理普通整数列表；不修改输入。
@@ -12,16 +10,7 @@ def summarize_values(values):
     空输入返回 {"unique": [], "counts": {}, "repeated": set()}。
     每次调用产生独立结果，结果中的列表、字典、集合可以单独修改。
     """
-    unique = []
-    counts = {}
-    for value in values:
-        if value not in counts:
-            unique.append(value)
-            counts[value] = 0
-        counts[value] += 1
-
-    repeated = {value for value, count in counts.items() if count > 1}
-    return {"unique": unique, "counts": counts, "repeated": repeated}
+    raise NotImplementedError("请实现 summarize_values")
 
 
 def apply_changes(original, updates, removals):
@@ -59,13 +48,4 @@ def compare_measurements(ids, baseline, current, threshold):
     恰好等于阈值属于正常；空输入也要返回三个对应的空容器。
     先把 NumPy 整数转成 Python int 再计算，避免小 dtype 溢出。
     """
-    deltas = [int(now) - int(before) for before, now in zip(baseline, current)]
-    delta = np.array(deltas, dtype=np.int64)
-    alerts = []
-    normal = {}
-    for identifier, change, value in zip(ids, deltas, current):
-        if abs(change) > threshold:
-            alerts.append(identifier)
-        else:
-            normal[identifier] = int(value)
-    return {"delta": delta, "alerts": alerts, "normal": normal}
+    raise NotImplementedError("请实现 compare_measurements")
